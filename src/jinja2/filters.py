@@ -825,11 +825,15 @@ def do_indent(
     first line and blank lines are not indented by default.
 
     :param width: Number of spaces, or a string, to indent by.
-    :param first: Don't skip indenting the first line.
+    :param first: Don't skip indenting the first line, unless it is empty and
+        ``blank`` is false.
     :param blank: Don't skip indenting empty lines.
 
     .. versionchanged:: 3.0
         ``width`` can be a string.
+
+    .. versionchanged:: 3.2
+        Don't indent an empty first line when ``blank`` is false.
 
     .. versionchanged:: 2.10
         Blank lines are not indented by default.
@@ -848,11 +852,12 @@ def do_indent(
         newline = Markup(newline)
 
     s += newline  # this quirk is necessary for splitlines method
+    lines = s.splitlines()
+    first_line = lines[0] if lines else ""
 
     if blank:
-        rv = (newline + indention).join(s.splitlines())
+        rv = (newline + indention).join(lines)
     else:
-        lines = s.splitlines()
         rv = lines.pop(0)
 
         if lines:
@@ -860,7 +865,7 @@ def do_indent(
                 indention + line if line else line for line in lines
             )
 
-    if first:
+    if first and (blank or first_line):
         rv = indention + rv
 
     return rv

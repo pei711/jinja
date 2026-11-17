@@ -166,7 +166,7 @@ class TestFilter:
         t = env.from_string("{{ foo|indent(2, false, true) }}")
         assert t.render(foo=text) == '\n  foo bar\n  "baz"\n  '
         t = env.from_string("{{ foo|indent(2, true, false) }}")
-        assert t.render(foo=text) == '  \n  foo bar\n  "baz"\n'
+        assert t.render(foo=text) == '\n  foo bar\n  "baz"\n'
         t = env.from_string("{{ foo|indent(2, true, true) }}")
         assert t.render(foo=text) == '  \n  foo bar\n  "baz"\n  '
 
@@ -178,6 +178,8 @@ class TestFilter:
         assert t.render() == "    jinja"
         t = env.from_string('{{ "jinja"|indent(blank=true) }}')
         assert t.render() == "jinja"
+        t = env.from_string("{% filter indent(4, first=True) %}{% endfilter %}")
+        assert t.render() == ""
 
     def test_indent_markup_input(self, env):
         """
