@@ -13,6 +13,8 @@ Unreleased
 -   Use modern packaging metadata with ``pyproject.toml`` instead of ``setup.cfg``.
     :pr:`1793`
 -   Use ``flit_core`` instead of ``setuptools`` as build backend.
+-   Correct the type annotations for ``TemplateStream.dump`` when writing to
+    text or binary streams. :issue:`1983`
 
 
 Version 3.1.6

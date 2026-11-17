@@ -1582,9 +1582,25 @@ class TemplateStream:
         self._gen = gen
         self.disable_buffering()
 
+    @typing.overload
     def dump(
         self,
         fp: str | t.IO[bytes],
+        encoding: str,
+        errors: str | None = "strict",
+    ) -> None: ...
+
+    @typing.overload
+    def dump(
+        self,
+        fp: str | t.IO[str],
+        encoding: None = None,
+        errors: str | None = "strict",
+    ) -> None: ...
+
+    def dump(
+        self,
+        fp: str | t.IO[t.Any],
         encoding: str | None = None,
         errors: str | None = "strict",
     ) -> None:
