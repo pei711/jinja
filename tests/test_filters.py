@@ -176,6 +176,10 @@ class TestFilter:
         assert t.render() == "jinja"
         t = env.from_string('{{ "jinja"|indent(first=true) }}')
         assert t.render() == "    jinja"
+        t = env.from_string('{{ ""|indent(first=true) }}')
+        assert t.render() == ""
+        t = env.from_string('{{ ""|indent(first=true, blank=true) }}')
+        assert t.render() == "    "
         t = env.from_string('{{ "jinja"|indent(blank=true) }}')
         assert t.render() == "jinja"
 

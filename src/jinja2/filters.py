@@ -836,6 +836,9 @@ def do_indent(
 
         Rename the ``indentfirst`` argument to ``first``.
     """
+    if not s and not blank:
+        return s
+
     if isinstance(width, str):
         indention = width
     else:
