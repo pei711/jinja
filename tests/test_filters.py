@@ -1,5 +1,6 @@
 import random
 from collections import namedtuple
+from collections import UserDict
 
 import pytest
 from markupsafe import Markup
@@ -682,6 +683,10 @@ class TestFilter:
             ("Hello, world\u203d", "Hello%2C%20world%E2%80%BD"),
             ({"f": 1}, "f=1"),
             ([("f", 1), ("z", 2)], "f=1&amp;z=2"),
+            (
+                UserDict({"Aa": "PersonA@123.com", "Bb": "PersonB@123.com"}),
+                "Aa=PersonA%40123.com&amp;Bb=PersonB%40123.com",
+            ),
             ({"\u203d": 1}, "%E2%80%BD=1"),
             ({0: 1}, "0=1"),
             ([("a b/c", "a b/c")], "a+b%2Fc=a+b%2Fc"),

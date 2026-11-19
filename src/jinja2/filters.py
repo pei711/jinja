@@ -165,7 +165,7 @@ def do_urlencode(
     if isinstance(value, str) or not isinstance(value, abc.Iterable):
         return url_quote(value)
 
-    if isinstance(value, dict):
+    if isinstance(value, abc.Mapping):
         items: t.Iterable[tuple[str, t.Any]] = value.items()
     else:
         items = value  # type: ignore
