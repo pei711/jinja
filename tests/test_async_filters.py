@@ -265,6 +265,9 @@ def test_slice(env_async, items):
         "[[0, 1, 2, 3], [4, 5, 6, 'X'], [7, 8, 9, 'X']]"
     )
 
+    tmpl = env_async.from_string("{{ items()|slice(5, 'X')|list }}")
+    assert tmpl.render(items=items) == "[[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]]"
+
 
 def test_unique_with_async_gen(env_async):
     items = ["a", "b", "c", "c", "a", "d", "z"]

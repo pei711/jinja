@@ -78,6 +78,11 @@ class TestFilter:
             "[[0, 1, 2, 3], [4, 5, 6, 'X'], [7, 8, 9, 'X']]"
         )
 
+        tmpl = env.from_string("{{ foo|slice(5, 'X')|list }}")
+        assert tmpl.render(foo=list(range(10))) == (
+            "[[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]]"
+        )
+
     def test_escape(self, env):
         tmpl = env.from_string("""{{ '<">&'|escape }}""")
         out = tmpl.render()
