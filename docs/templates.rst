@@ -1488,7 +1488,10 @@ something else>``.
 
 The `else` part is optional.  If not provided, the else block implicitly
 evaluates into an :class:`Undefined` object (regardless of what ``undefined``
-in the environment is set to):
+in the environment is set to).  This is a display-oriented shortcut, rather
+than a missing-variable lookup, so it does not use the environment's undefined
+type.  In particular, assigning the result of an else-less expression will
+not use :class:`StrictUndefined` to catch the false case:
 
 .. code-block:: jinja
 
